@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/mghignet/cookie-flash-messages#readme",
   "dependencies": {
-    "cookie": "0.2.3"
+    "cookie": "0.2.3",
+    "escape-html": "1.0.3",
   }
 }

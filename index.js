@@ -1,6 +1,7 @@
 'use strict';
 
 var cookie = require('cookie');
+var escape = require('escape-html');
 
 module.exports = function (req, res, next) {
 
@@ -20,7 +21,15 @@ module.exports = function (req, res, next) {
     if (req.headers.cookie) {
         var cookies = cookie.parse(req.headers.cookie);
         if (cookies.cookie_flash_message) {
-            res.locals.flashMessage = JSON.parse(cookies.cookie_flash_message);
+            var flashMessage = JSON.parse(cookies.cookie_flash_message);
+
+            // Escape any HTML the user may have added in the cookie
+            var flashMessageEscaped = {
+                type = escape(flashMessage.type),
+                text = escape(flashMessage.text)
+            }
+
+            res.locals.flashMessage = flashMessageEscaped;
 
             // Clear previous flash messages (for the next request only). It won't affect the current request
             res.clearCookie('cookie_flash_message');
