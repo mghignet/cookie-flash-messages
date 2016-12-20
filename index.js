@@ -25,8 +25,8 @@ module.exports = function (req, res, next) {
 
             // Escape any HTML the user may have added in the cookie
             var flashMessageEscaped = {
-                type = escape(flashMessage.type),
-                text = escape(flashMessage.text)
+                type: escape(flashMessage.type),
+                text: escape(flashMessage.text)
             }
 
             res.locals.flashMessage = flashMessageEscaped;
